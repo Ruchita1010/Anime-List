@@ -21,3 +21,6 @@ Build with:
 
 ## Demo
 👉 [Live Demo](https://ruchita1010.github.io/Anime-List/)
+
+## Notes:
+After the upgradion of the API to version 4, the search results don't seem to be accurate!
