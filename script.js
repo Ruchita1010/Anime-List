@@ -11,7 +11,7 @@ searchInput.addEventListener("change", searchAnime);
 //Functions
 //For getting the top animes
 async function getTopAnime() {
-    const url = `https://api.jikan.moe/v3/top/anime`;
+  const url = `https://api.jikan.moe/v4/top/anime`;
 
     const res = await fetch(url).catch((err) => {
         displayError(err.message);
@@ -23,13 +23,13 @@ async function getTopAnime() {
         //Getting the animeList div
         const animeList = document.getElementById("anime-list");
 
-        const animeArray = data.top;
+        const animeArray = data.data;
 
         //Looping through the animArray
         animeArray.forEach(anime => {
             const animeCard = document.createElement("div");
             animeCard.classList.add("anime-card");
-            animeCard.innerHTML = `<img src="${anime.image_url}" alt="">
+            animeCard.innerHTML = `<img src="${anime.images.jpg.image_url}" alt="">
                 <p class="anime-title">${anime.title},</br> 
                     Episodes: ${anime.episodes},</br> 
                     Rating: ${anime.score},</br>
@@ -51,7 +51,7 @@ function searchAnime(e) {
     //Getting the entered anime name
     const animeName = e.target.value;
 
-    const url = `https://api.jikan.moe/v3/search/anime?q=${animeName}&page=1`;
+  const url = `https://api.jikan.moe/v4/anime?q=${animeName}&page=1`;
 
     fetch(url).then(res => {
         return res.json();
@@ -68,12 +68,12 @@ function searchAnime(e) {
         const animeList = document.getElementById("anime-list");
 
         //Getting the results array
-        const searchResults = data.results;
+        const searchResults = data.data;
 
         //Looping through the resultsArray
         searchResults.forEach(anime => {
             const animeCard = document.querySelector(".anime-card");
-            animeCard.innerHTML = `<img src="${anime.image_url}" alt="">
+            animeCard.innerHTML = `<img src="${anime.images.jpg.image_url}" alt="">
                     <p class="anime-title">${anime.title}, </br> Episodes: ${anime.episodes}, </br> Rating: ${anime.score}</br>
                     <a href="${anime.url}" target="_blank" class="myanimelist-url">LEARN MORE</a></p>`;
             animeList.appendChild(animeCard);
